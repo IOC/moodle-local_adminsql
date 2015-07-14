@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
  **/
 class access_adminsql extends \core\event\base {
     protected function init() {
-        $this->data['crud'] = 'c'; // c(reate), r(ead), u(pdate), d(elete)
+        $this->data['crud'] = 'r'; // c(reate), r(ead), u(pdate), d(elete)
         $this->data['edulevel'] = self::LEVEL_OTHER;
         $this->data['objecttable'] = null;
     }
