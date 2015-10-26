@@ -32,14 +32,17 @@ class adminsql_form extends moodleform {
 
         $mform =& $this->_form;
 
-        $mform->addElement('textarea', 'querysql', get_string('querysql', 'local_adminsql'),
-                'rows="15" cols="80"');
-        $mform->addRule('querysql', get_string('required'), 'required', null, 'client');
+        $mform->addElement('textarea', 'querysql', get_string('querysql', 'local_adminsql'), 'rows="15" cols="80"');
         $mform->setType('querysql', PARAM_RAW_TRIMMED);
+        $mform->disabledIf('querysql', 'showprocesslist', 'checked');
 
         $options = array_combine(range(10, 100, 10), range(10, 100, 10));
         $mform->addElement('select', 'limitsql', get_string('limitsql', 'local_adminsql'), $options);
         $mform->setType('limitsql', PARAM_INT);
+        $mform->disabledIf('limitsql', 'showprocesslist', 'checked');
+
+        $mform->addElement('checkbox', 'showprocesslist', get_string('showprocesslist','local_adminsql'));
+
 
         $this->add_action_buttons(false, get_string('submit'));
     }
@@ -49,13 +52,15 @@ class adminsql_form extends moodleform {
 
         $errors = parent::validation($data, $files);
 
-        $sql = $data['querysql'];
-
-        // Simple test to avoid evil stuff in the SQL.
-        if (preg_match('/\b(ALTER|CREATE|DROP|GRANT|TRUNCATE|VACUUM|REINDEX|DISCARD|LOCK)\b/i', $sql)) {
-            $errors['querysql'] = get_string('notallowedstatement', 'local_adminsql');
-        } else if (strpos($sql, ';') !== false) {
-            $errors['querysql'] = get_string('nosemicolon', 'local_adminsql');
+        if (isset($data['querysql'])) {
+            if (empty($data['querysql']) and !isset($data['showprocesslist'])) {
+                $errors['querysql'] = get_string('required');
+            }
+            else if (preg_match('/\b(ALTER|CREATE|DROP|GRANT|TRUNCATE|VACUUM|REINDEX|DISCARD|LOCK)\b/i', $data['querysql'])) {
+                $errors['querysql'] = get_string('notallowedstatement', 'local_adminsql');
+            } else if (strpos($data['querysql'], ';') !== false) {
+                $errors['querysql'] = get_string('nosemicolon', 'local_adminsql');
+            }
         }
         return $errors;
     }

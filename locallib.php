@@ -23,9 +23,11 @@
 function process_sql($data) {
     global $DB, $USER;
 
-    $sql = $data->querysql;
+    $sql = isset($data->querysql)?$data->querysql:'';
     try {
-        if (preg_match('/\b(UPDATE|INSERT|INTO|DELETE)\b/i', $sql, $matches)) {
+        if (isset($data->showprocesslist)) {
+            $result = $DB->get_recordset_sql('SHOW FULL PROCESSLIST');
+        } else if (preg_match('/\b(UPDATE|INSERT|INTO|DELETE)\b/i', $sql, $matches)) {
             $result = $DB->execute($sql);
             $eventdata = array();
             $eventdata['context'] = context_system::instance();
@@ -35,6 +37,8 @@ function process_sql($data) {
 
             $event = \local_adminsql\event\update_adminsql::create($eventdata);
             $event->trigger();
+        } else if (preg_match('/^\bKILL\b/i', $sql)) {
+            $result = $DB->execute($sql);
         } else {
             $result = $DB->get_recordset_sql($sql, null, 0, $data->limitsql);
         }

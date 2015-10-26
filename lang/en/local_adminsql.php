@@ -29,3 +29,4 @@ $string['notallowedstatement'] = 'Not allowed statement';
 $string['pluginname'] = 'Admin SQL';
 $string['querysql'] = 'SQL Query';
 $string['results'] = 'Results';
+$string['showprocesslist'] = 'Show processlist';

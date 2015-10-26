@@ -29,3 +29,4 @@ $string['notallowedstatement'] = 'Comanda no permesa';
 $string['pluginname'] = 'Admin SQL';
 $string['querysql'] = 'SQL Query';
 $string['results'] = 'Resultats';
+$string['showprocesslist'] = 'Mostra els processos';
