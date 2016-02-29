@@ -21,4 +21,5 @@
  */
 
 $plugin->version = 2015071400;
+$plugin->component = 'local_adminsql';
 $plugin->cron = 0;
