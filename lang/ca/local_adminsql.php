@@ -17,6 +17,7 @@
 /**
  * @package    local-adminsql
  * @author     Marc Català <reskit@gmail.com>
+ * @copyright  2015 Institut Obert de Catalunya
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,6 +28,7 @@ $string['limitsql'] = 'Limita els resultats SQL';
 $string['nosemicolon'] = 'El punt i coma no està permès';
 $string['notallowedstatement'] = 'Comanda no permesa';
 $string['pluginname'] = 'Admin SQL';
+$string['privacy:metadata'] = 'Admin SQL no enregistra cap dada personal.';
 $string['querysql'] = 'SQL Query';
 $string['results'] = 'Resultats';
 $string['showprocesslist'] = 'Mostra els processos';

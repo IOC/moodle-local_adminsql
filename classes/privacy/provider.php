@@ -15,20 +15,26 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    local-adminsql
- * @author     Marc Català <reskit@gmail.com>
- * @copyright  2015 Institut Obert de Catalunya
+ * Privacy Subsystem implementation for local_adminsql.
+ *
+ * @package    local_adminsql
+ * @copyright  2018 Institut Obert de Catalunya
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['adminsql'] = 'Admin SQL';
-$string['eventaccessadminsql'] = 'Admin SQL has been accessed';
-$string['eventupdateadminsql'] = 'Admin SQL has updated the database';
-$string['limitsql'] = 'Limit SQL results';
-$string['nosemicolon'] = 'Semicolon is not allowed';
-$string['notallowedstatement'] = 'Not allowed statement';
-$string['pluginname'] = 'Admin SQL';
-$string['privacy:metadata'] = 'Admin SQL plugin does not store any personal data.';
-$string['querysql'] = 'SQL Query';
-$string['results'] = 'Results';
-$string['showprocesslist'] = 'Show processlist';
+namespace local_adminsql\privacy;
+
+defined('MOODLE_INTERNAL') || die();
+
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}

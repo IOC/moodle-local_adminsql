@@ -17,9 +17,11 @@
 /**
  * @package    local-adminsql
  * @author     Marc Català <reskit@gmail.com>
+ * @copyright  2015 Institut Obert de Catalunya
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version = 2015071400;
+$plugin->version = 2015071401;
+$plugin->requires  = 2018051700;
 $plugin->component = 'local_adminsql';
 $plugin->cron = 0;
